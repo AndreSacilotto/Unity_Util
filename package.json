@@ -1,0 +1,17 @@
+{
+  "name": "com.spectra.util",
+  "version": "1.0.0",
+  "unity": "2020.2",
+  "displayName": "Spectra Util Package",
+  "description": "This is package with util functions and classes",
+  "keywords": [
+    "Util",
+    "Serialization"
+  ],
+  "author": {
+    "name": "Andre Sacilotto",
+    "email": "andre.sacilotto.dev@gmail.com",
+    "url": "https://github.com/AndreSacilotto/Unity_Util"
+  },
+  "type": "library"
+}
