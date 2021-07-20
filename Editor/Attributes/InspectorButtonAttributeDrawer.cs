@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Spectra.Util.Editor;
 
 namespace Spectra.Attributes
 {
@@ -22,7 +23,7 @@ namespace Spectra.Attributes
         public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
         {
             Rect rect = new Rect(pos.x, pos.y, pos.width, base.GetPropertyHeight(prop, label));
-            UtilEditor.DrawDefaultPropretyDrawer(rect, prop, label);
+            UtilEditorGUI.DrawDefaultPropretyDrawer(rect, prop, label);
 
             var atr = attribute as InspectorButtonAttribute;
             var obj = prop.serializedObject.targetObject;

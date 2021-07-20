@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using Spectra.Util.Editor;
 
 namespace Spectra.Attributes
 {
@@ -10,7 +11,7 @@ namespace Spectra.Attributes
 
         public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
         {
-            UtilEditor.DrawDefaultPropretyDrawer(pos, prop, label);
+            UtilEditorGUI.DrawDefaultPropretyDrawer(pos, prop, label);
 
             Rect rect = pos;
             var atr = attribute as MenuContextAttribute;

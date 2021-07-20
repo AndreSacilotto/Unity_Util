@@ -3,14 +3,9 @@ using UnityEngine;
 
 namespace Spectra.Singleton
 {
-    public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject
+    public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObjectSingleton<T>
     {
         public static T Instance { get; private set; }
-
-        protected virtual void Awake()
-        {
-            SetInstance();
-        }
 
         public void SetInstance()
         {
@@ -20,14 +15,6 @@ namespace Spectra.Singleton
             else if (Instance != value)
                 throw new Exception($"One Instance of {GetType().FullName} already exists");
         }
-
-#if UNITY_EDITOR
-        protected virtual void Reset()
-        {
-            name = UtilSO.GetSOFileNameByID(this);
-        }
-#endif
-
     }
 
 }
