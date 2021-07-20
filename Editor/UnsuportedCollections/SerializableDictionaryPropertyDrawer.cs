@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEditor;
 using UnityEditorInternal;
+using UnityEngine;
 
-namespace Spectra.Util
+namespace Spectra.Collections
 {
     [CustomPropertyDrawer(typeof(SerializableDictionary<,>), false)]
     public class SerializableDictionaryPropertyDrawer : PropertyDrawer
@@ -46,7 +44,7 @@ namespace Spectra.Util
 
             if (reorderableList == null)
             {
-                myList = new SerializedProperty[2]{ keys, values };
+                myList = new SerializedProperty[2] { keys, values };
                 reorderableList = new ReorderableList(prop.serializedObject, myList[0], true, true, true, true)
                 {
                     drawElementCallback = DrawElementCallback,
@@ -58,7 +56,7 @@ namespace Spectra.Util
                 };
             }
 
-        Rect rect;
+            Rect rect;
             rect = new Rect(pos.x, pos.y, labelWidth, lineHeight);
             isFold = EditorGUI.Foldout(rect, isFold, label, true);
 
@@ -111,7 +109,7 @@ namespace Spectra.Util
             var handleW = ReorderableList.Defaults.dragHandleWidth;
 
             pos = new Rect(pos.x + padding, pos.y + 1, pos.width - padding, pos.height);
-            
+
             Rect rect;
 
             EditorGUIUtility.labelWidth = labelWidth - handleW - padding;

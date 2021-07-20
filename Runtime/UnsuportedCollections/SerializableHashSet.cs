@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
-
     [Serializable]
     public class SerializableHashSet<T> : IHashSetWrap<T>, ISerializationCallbackReceiver
     {

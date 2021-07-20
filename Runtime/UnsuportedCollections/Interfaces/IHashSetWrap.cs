@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
     public interface IHashSetWrap<T> : ISet<T>, IReadOnlyCollection<T>, IDeserializationCallback, ISerializable
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
     public interface IDictionaryWrap<K, V> : IDictionary<K, V>, IDictionary, IReadOnlyDictionary<K, V>, IDeserializationCallback, ISerializable
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
     [Serializable]
     public class SerializableQueue<T> : IQueueWrap<T>, ISerializationCallbackReceiver

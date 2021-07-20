@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
-    internal interface IStackWrap<T> : IReadOnlyCollection<T>, ICollection
+    public interface IStackWrap<T> : IReadOnlyCollection<T>, ICollection
     {
         void Clear();
         bool Contains(T item);

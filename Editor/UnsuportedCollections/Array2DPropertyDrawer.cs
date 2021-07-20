@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
     [CustomPropertyDrawer(typeof(Array2D<>), false)]
     public class Array2DPropertyDrawer : PropertyDrawer

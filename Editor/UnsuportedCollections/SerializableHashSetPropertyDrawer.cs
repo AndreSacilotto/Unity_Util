@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditorInternal;
+using UnityEngine;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
     [CustomPropertyDrawer(typeof(SerializableHashSet<>), false)]
     public class SerializableHashSetPropertyDrawer : PropertyDrawer

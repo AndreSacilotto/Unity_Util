@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using UnityEngine;
 using System.Collections.ObjectModel;
+using UnityEngine;
 
-namespace Spectra.Unsuported.Collections
+namespace Spectra.Collections
 {
     [Serializable]
     public class Array2D<T> : ICollection, IEnumerable, IStructuralComparable, IStructuralEquatable, ICloneable
@@ -77,7 +77,7 @@ namespace Spectra.Unsuported.Collections
         #endregion
 
         #region Interfaces
-        int IStructuralComparable.CompareTo(object other, IComparer comparer) => 
+        int IStructuralComparable.CompareTo(object other, IComparer comparer) =>
             ((IStructuralComparable)internalArray).CompareTo(other, comparer);
 
         void ICollection.CopyTo(Array array, int index) => internalArray.CopyTo(array, index);
