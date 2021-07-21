@@ -36,10 +36,10 @@ namespace Spectra.Collections
         #region Unity Serialization
 
         //Save the hash to list
-        public void OnBeforeSerialize() { }
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
 
         //Load the hash from list
-        public void OnAfterDeserialize()
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             hash.Clear();
 #if UNITY_EDITOR

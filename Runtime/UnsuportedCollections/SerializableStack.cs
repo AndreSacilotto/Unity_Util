@@ -19,9 +19,9 @@ namespace Spectra.Collections
 
         #region Unity Serialization
 
-        public void OnAfterDeserialize() { }
+        void ISerializationCallbackReceiver.OnAfterDeserialize() { }
 
-        public void OnBeforeSerialize()
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             stack.Clear();
             foreach (var el in list)

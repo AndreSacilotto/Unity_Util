@@ -77,9 +77,9 @@ namespace Spectra.Collections
 
         #region ISerializationCallbackReceiver implementation
 
-        public void OnBeforeSerialize() { }
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
 
-        public void OnAfterDeserialize()
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             dict.Clear();
 #if UNITY_EDITOR
@@ -114,8 +114,7 @@ namespace Spectra.Collections
         {
             keys = newKeys;
             values = newvalues;
-
-            OnAfterDeserialize();
+            (this as ISerializationCallbackReceiver).OnAfterDeserialize();
         }
         #endregion
 

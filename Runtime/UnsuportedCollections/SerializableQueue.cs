@@ -18,9 +18,9 @@ namespace Spectra.Collections
         object ICollection.SyncRoot => (queue as ICollection).SyncRoot;
 
         #region Unity Serialization
-        public void OnAfterDeserialize() { }
+        void ISerializationCallbackReceiver.OnAfterDeserialize() { }
 
-        public void OnBeforeSerialize()
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             queue.Clear();
             foreach (var el in list)
