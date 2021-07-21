@@ -17,7 +17,7 @@ namespace Spectra.Attributes
         {
             if (!draw)
                 return base.GetPropertyHeight(prop, label);
-            return base.GetPropertyHeight(prop, label) + (EditorGUIUtility.singleLineHeight + 2) * len;
+            return base.GetPropertyHeight(prop, label) + (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * len;
         }
 
         public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
@@ -56,7 +56,7 @@ namespace Spectra.Attributes
                 }
                 foreach (var x in methods)
                 {
-                    rect = new Rect(pos.x, rect.y + rect.height + 2, pos.width, EditorGUIUtility.singleLineHeight);
+                    rect = new Rect(pos.x, rect.y + rect.height + EditorGUIUtility.standardVerticalSpacing, pos.width, EditorGUIUtility.singleLineHeight);
                     if (GUI.Button(rect, ObjectNames.NicifyVariableName(x.Name)))
                         x.Invoke(obj, atr.objParam);
                 }
