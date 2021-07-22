@@ -27,8 +27,12 @@ namespace Spectra.Singleton
 
         public static void UnloadResource()
         {
+            if (instance == null)
+                return; 
+            var asset = instance;
             instance = null;
-            Resources.UnloadAsset(instance);
+            Resources.UnloadAsset(asset);
+            Resources.UnloadUnusedAssets();
         }
     }
 }
