@@ -2,21 +2,24 @@
 
 namespace Spectra.Singleton
 {
-    public abstract class Singleton<T> where T : class
+    /// <summary>
+    /// Singleton that will try to be setted in the constructor and can be changed after that.
+    /// </summary>
+    /// <typeparam name="T">T is ItSelf</typeparam>
+    public abstract class Singleton<T> : ISetAsSingleton where T : Singleton<T>
     {
-        public static T Instance { get; private set; }
+        private static T instance;
+        public static T Instance => instance;
 
-        public Singleton()
-        {
-            SetInstance(this as T);
-        }
+        public Singleton() => SetAsInstance();
 
-        public void SetInstance(T value)
+        public void SetAsInstance()
         {
-            if (Instance == null)
-                Instance = value;
+            var value = this as T;
+            if (instance == null)
+                instance = value;
             else if (Instance != value)
-                throw new Exception($"One Instance of {GetType().Name} already exists");
+                throw new Exception($"One Instance of {typeof(T).FullName} already exists");
         }
     }
 }
