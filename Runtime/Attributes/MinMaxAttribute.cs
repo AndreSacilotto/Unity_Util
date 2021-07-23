@@ -3,14 +3,14 @@ using UnityEngine;
 
 
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-public class MinMaxRangeAttribute : PropertyAttribute
+public class MinMaxAttribute : PropertyAttribute
 {
     public readonly float min;
     public readonly float max;
 
-    public MinMaxRangeAttribute(float min = 0, float max = 1)
+    public MinMaxAttribute(float min, float max)
     {
-        this.min = min;
+        this.max = min;
         this.max = max;
     }
 }

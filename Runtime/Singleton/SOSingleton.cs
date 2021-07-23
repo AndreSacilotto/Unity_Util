@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Spectra.Singleton
 {
-    public abstract class SOSingleton<T> : ScriptableObject, ISetAsSingleton where T : SOSingleton<T>
+    public abstract class SOSingleton<T> : ScriptableObject, IAsSingleton where T : SOSingleton<T>
     {
         private static T instance;
         public static T Instance => instance;
 
-        protected virtual void OnEnable() => SetAsInstance();
-        public void SetAsInstance()
+        protected virtual void OnEnable() => SetAsSingleton();
+        public void SetAsSingleton()
         {
             var value = this as T;
             if (Instance == null)
@@ -18,9 +18,9 @@ namespace Spectra.Singleton
                 throw new Exception($"One Instance of { GetType().FullName } already exists");
         }
 
-        protected virtual void OnDestroy()
+        public void ResignAsSingleton()
         {
-            if(this == Instance)
+            if (this == Instance)
                 instance = null;
         }
     }

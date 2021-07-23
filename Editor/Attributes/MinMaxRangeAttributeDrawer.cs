@@ -23,7 +23,7 @@ public class MinMaxRangeAttributeDrawer : PropertyDrawer
         else
         {
             base.OnGUI(pos, property, label);
-            Debug.LogError("The Attribute MinMaxRange can only be used with Vector2 and Vector2Int");
+            Debug.LogError("The MinMaxRangeAttribute can only be used with Vector2 and Vector2Int");
         }
 
         EditorGUI.EndProperty();

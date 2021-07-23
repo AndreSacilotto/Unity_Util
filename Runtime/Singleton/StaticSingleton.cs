@@ -3,7 +3,7 @@
 namespace Spectra.Singleton
 {
     /// <summary>
-    /// Singleton that dont need to be created or setted and cannot be changed
+    /// Singleton of a class that will not need to be instantiated and its instance cannot be changed
     /// </summary>
     /// <typeparam name="T">T is ItSelf</typeparam>
     public abstract class StaticSingleton<T> where T : class, new()

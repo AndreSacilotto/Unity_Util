@@ -5,7 +5,7 @@ namespace Spectra.Singleton
     [DisallowMultipleComponent]
     public abstract class MonoBehaviourSingletonPersist<T> : MonoBehaviourSingleton<T> where T : MonoBehaviour
     {
-        public override void SetAsInstance()
+        public override void SetAsSingleton()
         {
             var value = this as T;
             if (instance == null)

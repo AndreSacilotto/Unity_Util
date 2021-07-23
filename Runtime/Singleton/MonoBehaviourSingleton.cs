@@ -3,14 +3,14 @@
 namespace Spectra.Singleton
 {
     [DisallowMultipleComponent]
-    public abstract class MonoBehaviourSingleton<T> : MonoBehaviour, ISetAsSingleton where T : MonoBehaviour
+    public abstract class MonoBehaviourSingleton<T> : MonoBehaviour, IAsSingleton where T : MonoBehaviour
     {
         protected static T instance;
         public static T Instance => instance;
 
-        protected virtual void Awake() => SetAsInstance();
+        protected virtual void Awake() => SetAsSingleton();
 
-        public virtual void SetAsInstance()
+        public virtual void SetAsSingleton()
         {
             var value = this as T;
             if (instance == null)
@@ -19,10 +19,12 @@ namespace Spectra.Singleton
                 Destroy(value);
         }
 
-        protected virtual void OnDestroy()
+        void IAsSingleton.ResignAsSingleton()
         {
             if (this == instance)
                 instance = null;
         }
+
+        protected virtual void OnDestroy() => (this as IAsSingleton).ResignAsSingleton();
     }
 }

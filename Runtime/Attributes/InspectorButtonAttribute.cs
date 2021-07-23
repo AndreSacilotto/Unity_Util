@@ -13,9 +13,9 @@ namespace Spectra.Attributes
             PlayMode = 2,
         }
 
-        public Execute execute;
-        public string[] methodNames;
-        public object[] objParam;
+        public readonly Execute execute;
+        public readonly string[] methodNames;
+        public readonly object[] objParam;
 
         public InspectorButtonAttribute(object[] objParam, params string[] methodsNames)
         {
