@@ -15,7 +15,7 @@ namespace Spectra.Singleton
                 DontDestroyOnLoad(instance);
         }
 
-        public virtual void SetAsSingleton(bool dontDestroyOnLoad = false, bool destroyOld = false, bool destroyIfInvalid = true)
+        public void SetAsSingleton(bool dontDestroyOnLoad = false, bool destroyOld = false, bool destroyIfInvalid = true)
         {
             var value = this as T;
             if (instance == null)
