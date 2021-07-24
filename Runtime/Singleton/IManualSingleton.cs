@@ -1,6 +1,6 @@
 ﻿namespace Spectra.Singleton
 {
-    public interface IAsSingleton
+    public interface IManualSingleton
     {
         void SetAsSingleton();
         void ResignAsSingleton();

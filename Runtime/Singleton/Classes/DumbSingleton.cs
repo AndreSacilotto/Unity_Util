@@ -2,11 +2,7 @@
 
 namespace Spectra.Singleton
 {
-    /// <summary>
-    /// Singleton of a class that will not need to be instantiated and its instance cannot be changed
-    /// </summary>
-    /// <typeparam name="T">T is ItSelf</typeparam>
-    public abstract class StaticSingleton<T> where T : class, new()
+    public abstract class DumbSingleton<T> where T : DumbSingleton<T>, new()
     {
         //Could use lazy
         private static T instance;
@@ -17,8 +13,7 @@ namespace Spectra.Singleton
                 return instance;
             }
         }
-
-        protected StaticSingleton() { }
+        protected DumbSingleton() { }
     }
 
 }

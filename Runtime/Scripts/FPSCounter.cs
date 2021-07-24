@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Spectra.Others
 {
-    public class FPSCounter : Singleton.MonoBehaviourSingleton<FPSCounter>
+    public class FPSCounter : Singleton.MonoBehaviourManualSingleton<FPSCounter>
     {
         const float fpsMeasurePeriod = 0.5f;
 
