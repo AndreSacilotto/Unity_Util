@@ -9,29 +9,31 @@ using UnityObject = UnityEngine.Object;
 namespace Spectra.ObjectPooling
 {
     [Serializable]
-    public class GameObjectPool<T> : IGameObjectPool<T> where T : Component, IGameObjectPoolItem<T>
+    public class GameObjectPoolEvents<T> : IGameObjectPool<T> where T : Component
     {
-        private GameObject poolObject;
-        private Transform poolParent;
-
         [SerializeField, Attributes.ReadOnly]
         public List<T> pool = new List<T>();
         public HashSet<T> currentPool = new HashSet<T>();
 
-        public GameObjectPool(GameObject poolObject, int initialSize = 0, Transform poolParent = null)
+        public event Func<T> CreateFunc;
+        public event Action<T> OnTakeFromPool;
+        public event Action<T> OnReturnToPool;
+        public event Action<T> OnDestroyFromPool;
+
+        public GameObjectPoolEvents(Func<T> createFunc, int initialSize = 0, Action<T> onTakeFromPool = null, Action<T> onReturnToPool = null, Action<T> onDestroyFromPool = null)
         {
-            this.poolObject = poolObject;
-            this.poolParent = poolParent;
+            CreateFunc = createFunc;
+            OnTakeFromPool = onTakeFromPool;
+            OnReturnToPool = onReturnToPool;
+            OnDestroyFromPool = onDestroyFromPool;
             for (int i = 0; i < initialSize; i++)
-                currentPool.Add(InstantiateObject());
+                currentPool.Add(createFunc());
         }
 
         private T InstantiateObject()
         {
-            var go = poolParent == null ? UnityObject.Instantiate(poolObject) : UnityObject.Instantiate(poolObject, poolParent);
-            var item = go.GetComponent<T>();
+            var item = CreateFunc();
             pool.Add(item);
-            item.OnCreate(this);
             return item;
         }
 
@@ -47,7 +49,7 @@ namespace Spectra.ObjectPooling
             }
             else
                 item = InstantiateObject();
-            item.OnTakeFromPool();
+            OnTakeFromPool?.Invoke(item);
             return item;
         }
 
@@ -55,14 +57,14 @@ namespace Spectra.ObjectPooling
         {
             var canReturn = currentPool.Add(item);
             if (canReturn)
-                item.OnReturnToPool();
+                OnReturnToPool?.Invoke(item);
             return canReturn;
         }
 
         public void Clear()
         {
             foreach (var item in pool)
-                item.OnDestroyFromPool();
+                OnDestroyFromPool?.Invoke(item);
             pool.Clear();
             currentPool.Clear();
         }
@@ -70,17 +72,12 @@ namespace Spectra.ObjectPooling
         public void SetParent(Transform parent)
         {
             if(parent != null)
-            {
-                poolParent = parent;
                 foreach (var item in pool)
                     item.transform.SetParent(parent);
-            }
         }
 
         public IEnumerator<T> GetEnumerator() => pool.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => pool.GetEnumerator();
 
     }
-
-
 }

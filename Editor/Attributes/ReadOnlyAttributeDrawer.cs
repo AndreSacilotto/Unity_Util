@@ -1,25 +1,19 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEditor;
+using UnityEditorInternal;
 
 namespace Spectra.Attributes
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnlyAttributeDrawer : PropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
         {
-            if (!property.isArray)
-            {
-                //GUI.enabled = false;
-                EditorGUI.BeginDisabledGroup(true);
-                EditorGUI.PropertyField(position, property, label, true);
-                EditorGUI.EndDisabledGroup();
-                //GUI.enabled = true;
-            }
-            else
-            {
-
-            }
+            //GUI.enabled = false;
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUI.PropertyField(pos, prop, label, true);
+            EditorGUI.EndDisabledGroup();
+            //GUI.enabled = true;
         }
     }
 }
