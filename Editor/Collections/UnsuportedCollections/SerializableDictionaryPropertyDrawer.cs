@@ -61,7 +61,8 @@ namespace Spectra.Collections
             isFold = EditorGUI.Foldout(rect, isFold, label, true);
 
             EditorGUI.BeginChangeCheck();
-            rect = new Rect(pos.width - EditorGUIUtility.fieldWidth, pos.y, EditorGUIUtility.fieldWidth, lineHeight);
+            var fw = EditorGUIUtility.fieldWidth;
+            rect = new Rect(pos.width - fw * 0.63f, pos.y, fw, lineHeight);
             var listSize = EditorGUI.IntField(rect, keys.arraySize);
             if (EditorGUI.EndChangeCheck())
             {

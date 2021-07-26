@@ -12,5 +12,6 @@
     "name": "Andre Sacilotto",
     "email": "andre.sacilotto.dev@gmail.com",
     "url": "https://github.com/AndreSacilotto/Unity_Util"
-  }
+  },
+  "type": "library"
 }

@@ -4,27 +4,32 @@ using UnityEngine;
 
 namespace Spectra.Collections
 {
-    [CustomPropertyDrawer(typeof(SerializableQueue<>), false)]
-    [CustomPropertyDrawer(typeof(SerializableStack<>), false)]
-    public class SerializableQueueStackPropertyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(SerializableHashSet<>), false)]
+    public class SerializableHashSetPropertyDrawer : PropertyDrawer
     {
         const string LIST = "list";
+        const string COLLISION = "collision";
+
+        ReorderableList reorderableList = null;
+        SerializedProperty myList = null;
+        bool isFold = true;
 
         public override float GetPropertyHeight(SerializedProperty prop, GUIContent label)
         {
+            var collision = prop.FindPropertyRelative(COLLISION);
+
             var vertSpace = EditorGUIUtility.standardVerticalSpacing;
 
             var height = EditorGUIUtility.singleLineHeight + vertSpace;
+
+            if (collision.boolValue)
+                height += EditorGUIUtility.singleLineHeight * 1.5f + vertSpace;
 
             if (myList != null && isFold)
                 height += reorderableList.GetHeight() + vertSpace;
 
             return height;
         }
-
-        ReorderableList reorderableList = null;
-        SerializedProperty myList = null;
-        bool isFold = true;
 
         public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
         {
@@ -33,6 +38,7 @@ namespace Spectra.Collections
             var labelWidth = EditorGUIUtility.labelWidth;
 
             var list = prop.FindPropertyRelative(LIST);
+            var collision = prop.FindPropertyRelative(COLLISION);
 
             if (reorderableList == null)
             {
@@ -50,13 +56,23 @@ namespace Spectra.Collections
             isFold = EditorGUI.Foldout(rect, isFold, label, true);
 
             EditorGUI.BeginChangeCheck();
-            rect = new Rect(pos.width - EditorGUIUtility.fieldWidth, pos.y, EditorGUIUtility.fieldWidth, lineHeight);
+            var fw = EditorGUIUtility.fieldWidth;
+            rect = new Rect(pos.width - fw * 0.63f, pos.y, fw, lineHeight);
             var listSize = EditorGUI.IntField(rect, list.arraySize);
             if (EditorGUI.EndChangeCheck())
                 list.arraySize = listSize;
 
+            if (collision.boolValue)
+            {
+                rect = new Rect(pos.x, rect.y + rect.height + vertSpace, pos.width, lineHeight * 1.5f);
+                EditorGUI.HelpBox(rect, "Key collision", MessageType.Warning);
+            }
+
             if (isFold)
-                reorderableList.DoList(new Rect(pos.x, rect.y + rect.height + vertSpace, pos.width, pos.height));
+            {
+                rect = new Rect(pos.x, rect.y + rect.height + vertSpace, pos.width, pos.height);
+                reorderableList.DoList(rect);
+            }
         }
 
         private void DrawElementCallback(Rect rect, int index, bool isActive, bool isFocused)
